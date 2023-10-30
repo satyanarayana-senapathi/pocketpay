@@ -1,0 +1,13 @@
+.signupContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.LogoIconStyleBox {
+  margin-top: 1.5rem;
+  width: 100%;
+  margin-left: 5rem;
+}

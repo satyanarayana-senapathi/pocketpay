@@ -1,0 +1,33 @@
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.51rem;
+}
+
+.LogoIconStyleBox {
+  margin-top: 1.5rem;
+  width: 100%;
+  margin-left: 5rem;
+}
+
+.BoxStyle {
+  width: 100%;
+}
+
+.StyledGrid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.gridItemStyle {
+  width: 33.6vw;
+}
+
+.gridItemStyle {
+  width: 33.6vw;
+}

@@ -1,0 +1,222 @@
+pvc:
+  name: database
+  storage: 4Gi
+  accessModes:
+  - ReadWriteOnce
+
+
+deployments:
+
+  - deployment_name: database-deployment
+    label_name: database-pod
+    container_name: database-container
+    replicaCount: 1     
+    image:
+      repository: mysql:latest
+    imagePullSecrets: my-ghcr-secret
+    envFrom: database-secret
+    port: 3306
+    volumeMounts:
+    - mountPath: /var/lib/mysql
+      name: mysql-volume
+    volumes: 
+    - name: mysql-volume
+      persistentVolumeClaim:
+        claimName: database
+
+  - deployment_name: frontend-deployment
+    label_name: frontend-pod
+    container_name: frontend-container
+    replicaCount: 1     
+    image:
+      repository: ghcr.io/satyanarayana-senapathi/bootcamp105-frontend:v2
+    imagePullSecrets: my-ghcr-secret
+    port: 80
+ 
+  - deployment_name: service-registry-deployment
+    label_name: service-registry-pod
+    container_name: service-registry-container
+    replicaCount: 1     
+    image:
+      repository: ghcr.io/satyanarayana-senapathi/bootcamp105-backend-service-registry:v2
+    imagePullSecrets: my-ghcr-secret
+    port: 8761
+    env:
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: https://be-bc-105.bootcamp64.tk/eureka/
+      
+    - name: EUREKA_INSTANCE_HOSTNAME
+      value: service-registry-service
+
+  - deployment_name: api-gateway-deployment
+    label_name: api-gateway-pod
+    container_name: api-gateway-container
+    replicaCount: 1     
+    image:
+      repository: ghcr.io/satyanarayana-senapathi/bootcamp105-backend-api-gateway:v2
+    imagePullSecrets: my-ghcr-secret
+    port: 9191
+    env:
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: https://be-bc-105.bootcamp64.tk/eureka/
+      
+    - name: EUREKA_INSTANCE_HOSTNAME
+      value: api-gateway-service
+
+    - name: SECRET_ID 
+      value: 5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
+
+
+  - deployment_name: transaction-service-deployment
+    label_name: transaction-service-pod
+    container_name: transaction-service-container
+    replicaCount: 1     
+    image:
+      repository: ghcr.io/satyanarayana-senapathi/bootcamp105-backend-transaction-service:v2
+    imagePullSecrets: my-ghcr-secret
+    port: 9002
+    env:
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: https://be-bc-105.bootcamp64.tk/eureka/
+      
+    - name: EUREKA_INSTANCE_HOSTNAME
+      value: transaction-service-service
+
+    - name: SPRING_DATASOURCE_URL
+      value: jdbc:mysql://54.163.23.53:30002/BC105_pocketpay?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    
+    - name:  SPRING_DATASOURCE_USERNAME
+      value: root
+
+    - name: SPRING_DATASOURCE_PASSWORD
+      value: bc@105
+    
+    - name: SPRING_FLYWAY_ENABLE
+      value: "false"
+  
+  - deployment_name: business-service-deployment
+    label_name: business-service-pod
+    container_name: business-service-container
+    replicaCount: 1     
+    image:
+      repository: ghcr.io/satyanarayana-senapathi/bootcamp105-backend-business-service:v2
+    imagePullSecrets: my-ghcr-secret
+    port: 9001
+    env:
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: https://be-bc-105.bootcamp64.tk/eureka/
+      
+    - name: EUREKA_INSTANCE_HOSTNAME
+      value: business-service-service
+
+    - name: SPRING_DATASOURCE_URL
+      value: jdbc:mysql://54.163.23.53:30002/BC105_pocketpay?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    
+    - name:  SPRING_DATASOURCE_USERNAME
+      value: root
+
+    - name: SPRING_DATASOURCE_PASSWORD
+      value: bc@105
+
+    - name: SPRING_FLYWAY_ENABLE
+      value: "false"
+
+  - deployment_name: user-service-deployment
+    label_name: user-service-pod
+    container_name: user-service-container
+    replicaCount: 1     
+    image:
+      repository: ghcr.io/satyanarayana-senapathi/bootcamp105-backend-user-service:v2
+    imagePullSecrets: my-ghcr-secret
+    port: 9003
+    env:
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: https://be-bc-105.bootcamp64.tk/eureka/
+      
+    - name: EUREKA_INSTANCE_HOSTNAME
+      value: user-service-service
+
+    - name: SPRING_DATASOURCE_URL
+      value: jdbc:mysql://54.163.23.53:30002/BC105_pocketpay?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    
+    - name:  SPRING_DATASOURCE_USERNAME
+      value: root
+
+    - name: SPRING_DATASOURCE_PASSWORD
+      value: bc@105
+    
+    - name: SPRING_FLYWAY_ENABLE
+      value: "false"
+
+    - name: SECRET_ID 
+      value: 5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
+
+  - deployment_name: cloud-config-server-deployment
+    label_name: cloud-config-server-pod
+    container_name: cloud-config-server-container
+    replicaCount: 1     
+    image:
+      repository: ghcr.io/satyanarayana-senapathi/bootcamp105-backend-cloud-config-server:v2
+    imagePullSecrets: my-ghcr-secret
+    port: 9296
+    env:
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: https://be-bc-105.bootcamp64.tk/eureka/
+      
+    - name: EUREKA_INSTANCE_HOSTNAME
+      value: cloud-config-server-service
+    
+  
+
+services:
+  
+  - service_name: database-service
+    label_name: database-pod
+    type: NodePort
+    port: 3306
+    targetPort: 3306
+    nodePort: 30002
+
+  - service_name: frontend-service
+    label_name: frontend-pod
+    type: ClusterIP
+    port: 80
+    targetPort: 80
+
+  - service_name: service-registry-service
+    label_name: service-registry-pod
+    type: ClusterIP
+    port: 8761
+    targetPort: 8761
+
+  - service_name: api-gateway-service
+    label_name: api-gateway-pod
+    type: ClusterIP
+    port: 9191
+    targetPort: 9191
+  
+  - service_name: transaction-service-service
+    label_name: transaction-service-pod
+    type: ClusterIP
+    port: 9002
+    targetPort: 9002
+
+  - service_name: user-service-service
+    label_name: user-service-pod
+    type: ClusterIP
+    port: 9003
+    targetPort: 9003
+  
+  - service_name: cloud-config-server-service
+    label_name: cloud-config-server-pod
+    type: ClusterIP
+    port: 9296
+    targetPort: 9296
+
+  - service_name: business-service-service
+    label_name: business-service-pod
+    type: ClusterIP
+    port: 9001
+    targetPort: 9001
+
+  

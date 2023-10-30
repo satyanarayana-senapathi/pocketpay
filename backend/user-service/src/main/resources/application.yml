@@ -1,0 +1,30 @@
+server:
+  port: 9003
+
+spring:
+  application:
+    name: USER-SERVICE
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+
+  flyway:
+      enabled: true
+      locations: classpath:/db/migration
+      baseline-on-migrate: true
+      validate-on-migrate: false
+      mixed: true
+
+spring.zipkin.enabled: true
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: false
+    hostname: localhost

@@ -1,0 +1,65 @@
+:root {
+  --structural-color: var(--palette-structuralColor-contrastText, #ffffff);
+}
+
+.LogoIconStyleBox {
+  margin-top: 1.5rem;
+  width: 100%;
+  margin-left: 5rem;
+}
+
+.StyledGrid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.ButtonStyle {
+  padding: 0px;
+  background-color: var(--structural-color);
+}
+
+.ButtonStyle:hover {
+  background-color: var(--structural-color);
+}
+
+.CloseButtonBox {
+  margin-top: 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 5rem;
+}
+
+.gridItemStyle {
+  width: 33.6vw;
+}
+
+.gridItemWithButtonStyle {
+  width: 51.17vw;
+  padding-left: 135px;
+}
+
+.BoxStyle {
+  width: 100%;
+}
+
+.BackStyle {
+  width: 50%;
+}
+
+.TransferStyle {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.CardStyle {
+  width: 30vw;
+  margin-right: 1.5rem;
+}

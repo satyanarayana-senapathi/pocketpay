@@ -1,0 +1,116 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "rossgener@gmail.com",
+      "password": "jZpn0@123",
+      "phone_number": 12345678910,
+      "country_code": "GBP"
+    }
+  ],
+  "personal_detail": [
+    {
+      "id": 1,
+      "first_name": "Ross",
+      "last_name": "Gener",
+      "dob": "1998/09/19",
+      "country_of_residency": "United Kingdom",
+      "home_address": "43 Bishopthorpe Road",
+      "city": "Pencoed",
+      "pincode": "CF357RJ",
+      "user_id": 1
+    }
+  ],
+  "business": [
+    {
+      "id": 1,
+      "business_name": "Zentech Solutions Pvt Ltd",
+      "registration_number": "2020ZEN5367GJ",
+      "registered_address": "#2097, Triveni Main Rd, Gokula 1st Stage, Nanjappa Reddy Colony, Yeswanthpur, Bengaluru, Karnataka 560054",
+      "business_type_id": 1,
+      "user_id": 1
+    }
+  ],
+  "business_type": [
+    {
+      "id": 1,
+      "category": "Real estate or construction",
+      "sub_category": "Real estate sale, purchase and management",
+      "size_of_business": "50-100"
+    }
+  ],
+  "owner": [
+    {
+      "id": 1,
+      "first_name": "Ross",
+      "last_name": "Gabriel",
+      "country_of_residency": "United Kingdom",
+      "dob": "1980/09/09",
+      "type": "director",
+      "business_id": 1
+    },
+    {
+      "id": 2,
+      "first_name": "Jack",
+      "last_name": "Gabriel",
+      "country_of_residency": "United Kingdom",
+      "dob": "1980/09/09",
+      "type": "share_holder",
+      "business_id": 1
+    }
+  ],
+  "payment_method": [
+    {
+      "id": 1,
+      "payment_option_mode": "debit",
+      "debit_card_id": 1,
+      "bank_account_id": 729019188810,
+      "user_id": 1
+    }
+  ],
+  "debit_card_payment": [
+    {
+      "id": 1,
+      "expiry_date": "2030/09/25",
+      "cvv": 499,
+      "bank_account_id": 729019188810
+    },
+    {
+      "id": 2,
+      "expiry_date": "2030/02/27",
+      "cvv": 312,
+      "bank_account_id": 729019188810
+    }
+  ],
+  "bank_account": [
+    {
+      "account_number": 729019188810,
+      "bank_name": "Lloyd",
+      "bank_address": "Pocket-Pay 56 Shoreditch High Street London E16JJ United Kingdom"
+    }
+  ],
+  "recipient": [
+    {
+      "id": 1,
+      "email": "mario.gabriel@gmail.com",
+      "first_name": "Mario",
+      "last_name": "Gabriel",
+      "account_number": 729019188810
+    }
+  ],
+  "transfer": [
+    {
+      "id": 1,
+      "amount_sent": 100,
+      "from_currency": "GBP",
+      "to_currency": "AUR",
+      "transfer_rate": 1.13,
+      "status": "sending",
+      "transfer_type": "debit",
+      "payment_purpose": "Paying for goods or services abroad",
+      "recipient_id": 1,
+      "user_id": 1,
+      "payment_method_id": 1
+    }
+  ]
+}

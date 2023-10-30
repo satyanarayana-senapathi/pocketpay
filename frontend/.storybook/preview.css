@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Gerbera';
+    src: url("../public/assets/fonts/Gerbera.woff");
+  }
+  *{
+    font-family: 'Gerbera',sans-serif;
+    text-decoration: none;
+  }
